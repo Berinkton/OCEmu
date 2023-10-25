@@ -25,6 +25,8 @@ end
 
 local ffi = require("ffi")
 
+local bit32 = require("bit32")
+
 local windows = (elsa.system.getOS() == "Windows")
 
 function math.trunc(n)
@@ -109,7 +111,6 @@ if elsa.opts.help then
 	print("    --basedir=DIRECTORY: Set base directory")
 	print("    --logfilter=FILTER: Set logging filter (only when debug is enabled in ocemu.cfg)")
 	print("    --debugger: Turn on the debugger (separate window) which can be useful for insights")
-	print("  lua boot.lua manage")
 	os.exit()
 end
 

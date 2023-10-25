@@ -4,9 +4,12 @@ OCEmu - OpenComputers Emulator
 Installation
 ------------
 
-Needs lua-5.2, luafilesystem, luautf8, luaffi, and SDL2.  
+Needs lua-5.2 or newer, luafilesystem, luautf8, luaffi, and SDL2.  
 luasocket is optional but is required for the Internet Component and higher precision timing.  
-luasec is optional but is required for HTTPS.
+luasec is optional but is required for HTTPS.  
+For lua-5.4 you need to install bit32 via luarocks.
+
+>**Note:** OCEmu is currently tested with lua-5.2, lua-5.3 and lua-5.4
 
 This git repository contains submodules, please clone using `git clone --recursive https://github.com/zenith391/OCEmu.git`
 
@@ -68,6 +71,7 @@ luarocks --lua-version 5.2 make
 # OpenComputer's lua source code is not provided, if you have svn then use the provided Makefile
 # If you hate svn, manually download assets/loot, assets/lua, and assets/font.hex into src/
 ```
+For Lua 5.3 support, replace `5.2` by `5.3` in the commands.
 
 ### Mac
 
@@ -95,6 +99,15 @@ luarocks-5.2 make
 ```
 For Lua 5.3 support, replace `5.2` by `5.3` in the commands.
 
+### Manually downloading the needed assets
+
+You can find the above mentioned assets in the OpenComputers Repository.  
+https://github.com/MightyPirates/OpenComputers
+
+The assets are under *src/main/resources/assets/opencomputers*.  
+Here you will find the **loot** and **lua** folders together with the **font.hex** file.  
+You can download the whole Repository as a zip file, extract it and copy the needed files to the src folder of OCEmu.
+
 Running
 -------
 Launch boot.lua with lua5.2, and provided everything is installed, you'll have a working Emulator.  
@@ -103,16 +116,16 @@ OCEmu stores its files in the following locations:
 OS      | Location
 ------- | ---
 Windows | `%APPDATA%\\OCEmu`
-Linux   | `$XDG_CONFIG_HOME/ocemu` or `$HOME/.config/ocemu`
+Linux   | `$XDG_CONFIG_HOME/ocemu` or `$HOME/.config/ocemu` or `$XDG_DATA_HOME/ocemu` or `$HOME/.local/share/ocemu`
 
 ```
 cd src
 lua boot.lua
 ```
 
-If you want to use a custom path (for example, for running multiple machines with unique filesystems) you can specify the machine path as an argument to boot.lua:
+If you want to use a custom path (for example, for running multiple machines with unique filesystems) you can specify the machine path as an argument to boot.lua via the --basedir option:
 
 ```
 cd src
-lua boot.lua /path/to/my/emulated/machine_a
+lua boot.lua --basedir=/path/to/my/emulated/machine_a
 ```
